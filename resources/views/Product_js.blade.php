@@ -29,6 +29,49 @@
                     if (res.status == 'success') {
                         $('#addModal').modal('hide');
                         $('#addProductForm')[0].reset('hide');
+                        $('.table').load(location.href+' .table');
+                    }
+                },
+                error: function(err) {
+                    let error = err.responseJSON;
+                    $.each(error.errors, function(index, value) {
+                        $('.errmsgcontainer').append('<span class="text-danger">' +
+                            value + '</span>' + '<br>')
+                    });
+                }
+            });
+        })
+        //Show product in Edit form
+        $(document).on('click','.Edit-form',function(){
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            let price = $(this).data('price');
+
+            $('#up_id').val(id);
+            $('#up_name').val(name);
+            $('#up_price').val(price);
+            
+        });
+        // Update form
+        $(document).on('click', '.Update_product', function(e) {
+            e.preventDefault();
+            let up_id = $('#up_id').val();
+            let up_name = $('#up_name').val();
+            let up_price = $('#up_price').val();
+            //console.log(name+price);
+            $.ajax({
+                url: "{{ route('Update.Product') }}",
+                method: 'post',
+                data: {
+                    up_id: up_id,
+                    up_name: up_name,
+                    up_price: up_price
+                },
+                success: function(res) {
+                    if (res.status == 'success') {
+                        $('#UpdateModal').modal('hide');
+                        $('#UpdateProductForm')[0].reset('hide');
+                        $('.table').load(location.href+' .table');
                     }
                 },
                 error: function(err) {

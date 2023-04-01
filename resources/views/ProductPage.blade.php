@@ -49,21 +49,29 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($products as $key=>$product)
+                            
+                        
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                            <th scope="row">{{$key+1}}</th>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->price}}</td>
                             <td>
-                                <a href="" class="btn btn-primary pr-2 " style="font-size: 18px;"><i
+                                <a href="" class="btn btn-primary Edit-form pr-2 " data-bs-toggle="modal" data-bs-target="#UpdateModal" 
+                                data-id={{$product->id}}
+                                data-name={{$product->name}}
+                                data-price={{$product->price}}
+                                style="font-size: 18px;"><i
                                         class="lar la-edit"></i></a>
                                 <a href="" class="btn btn-danger "><i class="las la-times-circle"
                                         style="font-size: 23px;"></i></a>
 
                             </td>
                         </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
+                {!!$products->links()!!}
             </div>
             <div class="col-2"></div>
         </div>
@@ -77,7 +85,7 @@
 
 
 
-    <!-- Modal -->
+    <!--Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLable" aria-hidden="true">
         <form action="" method="post" id="addProductForm" enctype="multipart/form-data">
             @csrf
@@ -105,6 +113,43 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary add_product">Create</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <!--Add Modal -->
+    <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="updateModalLable" aria-hidden="true">
+        <form action="" method="post" id="UpdateProductForm" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" id="up_id">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLable">Update Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="errmsgcontainer mb-3">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="up_name">Name</label>
+                            <input type="text" name="up_name" class="form-control mb-2" id="up_name"
+                                placeholder="product Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="up_price">Price</label>
+                            <input type="number" name="up_price" class="form-control mb-2" id="up_price"
+                                placeholder="product price">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary Update_product">Update</button>
                     </div>
                 </div>
             </div>
