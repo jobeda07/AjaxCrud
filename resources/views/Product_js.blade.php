@@ -29,7 +29,7 @@
                     if (res.status == 'success') {
                         $('#addModal').modal('hide');
                         $('#addProductForm')[0].reset('hide');
-                        $('.table').load(location.href+' .table');
+                        $('.table').load(location.href + ' .table');
                     }
                 },
                 error: function(err) {
@@ -42,7 +42,7 @@
             });
         })
         //Show product in Edit form
-        $(document).on('click','.Edit-form',function(){
+        $(document).on('click', '.Edit-form', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             let price = $(this).data('price');
@@ -50,7 +50,7 @@
             $('#up_id').val(id);
             $('#up_name').val(name);
             $('#up_price').val(price);
-            
+
         });
         // Update form
         $(document).on('click', '.Update_product', function(e) {
@@ -71,7 +71,7 @@
                     if (res.status == 'success') {
                         $('#UpdateModal').modal('hide');
                         $('#UpdateProductForm')[0].reset('hide');
-                        $('.table').load(location.href+' .table');
+                        $('.table').load(location.href + ' .table');
                     }
                 },
                 error: function(err) {
@@ -82,7 +82,29 @@
                     });
                 }
             });
-        })
+        });
+        // Delete form
+        $(document).on('click', '.Delete_product', function(e) {
+            e.preventDefault();
+            let product_id = $(this).data('id');
+            //alert(product_id);
+            if (confirm('Are you sure to delete product?')) {
+                $.ajax({
+                    url: "{{ route('Delete.Product') }}",
+                    method: 'post',
+                    data: {
+                        product_id: product_id
+                    },
+                    success: function(res) {
+                        if (res.status == 'success') {
+                            $('.table').load(location.href + ' .table');
+                        }
+                    }
+                });
+            }
 
+
+
+        });
     });
 </script>

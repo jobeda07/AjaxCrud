@@ -49,29 +49,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $key=>$product)
-                            
-                        
-                        <tr>
-                            <th scope="row">{{$key+1}}</th>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->price}}</td>
-                            <td>
-                                <a href="" class="btn btn-primary Edit-form pr-2 " data-bs-toggle="modal" data-bs-target="#UpdateModal" 
-                                data-id={{$product->id}}
-                                data-name={{$product->name}}
-                                data-price={{$product->price}}
-                                style="font-size: 18px;"><i
-                                        class="lar la-edit"></i></a>
-                                <a href="" class="btn btn-danger "><i class="las la-times-circle"
-                                        style="font-size: 23px;"></i></a>
+                        @foreach ($products as $key => $product)
+                            <tr>
+                                <th scope="row">{{ $key + 1 }}</th>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>
+                                    <a href="" class="btn btn-primary Edit-form pr-2 " data-bs-toggle="modal"
+                                        data-bs-target="#UpdateModal" data-id={{ $product->id }}
+                                        data-name={{ $product->name }} data-price={{ $product->price }}
+                                        style="font-size: 18px;"><i class="lar la-edit"></i></a>
+                                    <a href="" class="btn btn-danger Delete_product"
+                                        data-id={{ $product->id }}><i class="las la-times-circle"
+                                            style="font-size: 23px;"></i></a>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {!!$products->links()!!}
+                {!! $products->links() !!}
             </div>
             <div class="col-2"></div>
         </div>
@@ -130,7 +127,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="updateModalLable">Update Product</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="errmsgcontainer mb-3">

@@ -54,4 +54,10 @@ class AjaxController extends Controller
         'status'=>'success'
         ]);
     }
+    public function DeleteProduct(Request $request){
+        Product::find($request->product_id)->delete();
+        return response()->json([
+            'status'=>'success'
+        ]);
+    }
 }
