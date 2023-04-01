@@ -31,6 +31,9 @@
                 <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
                     Add <i class="las la-plus" style="font-size: 22px;"></i>
                 </button>
+                <br>
+                <input type="text" name="search" placeholder="search.." id="search"
+                    class="form-control mb-3 w-50">
 
             </div>
             <div class="col-2"></div>

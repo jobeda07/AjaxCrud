@@ -64,4 +64,18 @@ class AjaxController extends Controller
         $products=Product::latest()->paginate(5);
         return view('Pagination_ProductPage',compact('products'))->render();
     }
+    public function SearchProduct(Request $request){
+        $products=Product::where('name','like','%'.$request->search_string.'%')
+        ->orwhere('price','like','%'.$request->search_string.'%')
+        ->orderby('id','desc')
+        ->paginate(5);
+
+        if($products->count() >= 1){
+            return view('Pagination_ProductPage',compact('products'))->render();
+        }else{
+            return response()->json([
+                'status'=>'nothing_found',
+            ]);
+        }
+    }
 }

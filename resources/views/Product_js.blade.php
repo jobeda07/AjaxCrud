@@ -182,5 +182,26 @@
                 }
             })
         }
+        //search box
+        $(document).on('keyup', function(e) {
+            e.preventDefault();
+            let search_string = $('#search').val();
+            //console.log(search_string);
+            $.ajax({
+                url: "{{ route('Search.Product') }}",
+                method: 'get',
+                data: {
+                    search_string: search_string
+                },
+                success: function(res) {
+                    $('.table-data').html(res);
+                    if (res.status == 'nothing_found') {
+                        $('.table-data').html('<span class="text-danger">' +
+                            'nothing found' + '</span>');
+                    }
+                }
+
+            })
+        });
     });
 </script>
