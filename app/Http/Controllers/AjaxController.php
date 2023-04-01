@@ -60,4 +60,8 @@ class AjaxController extends Controller
             'status'=>'success'
         ]);
     }
+    public function pagination(Request $request){
+        $products=Product::latest()->paginate(5);
+        return view('Pagination_ProductPage',compact('products'))->render();
+    }
 }

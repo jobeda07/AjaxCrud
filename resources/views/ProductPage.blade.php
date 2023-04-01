@@ -15,6 +15,8 @@
     <link rel="stylesheet"
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
+    {{-- toastr package  --}}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <title>Ajax Crud</title>
 </head>
@@ -39,36 +41,38 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Product Price</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($products as $key => $product)
+                <div class="table-data">
+                    <table class="table table-bordered table-hover">
+                        <thead>
                             <tr>
-                                <th scope="row">{{ $key + 1 }}</th>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>
-                                    <a href="" class="btn btn-primary Edit-form pr-2 " data-bs-toggle="modal"
-                                        data-bs-target="#UpdateModal" data-id={{ $product->id }}
-                                        data-name={{ $product->name }} data-price={{ $product->price }}
-                                        style="font-size: 18px;"><i class="lar la-edit"></i></a>
-                                    <a href="" class="btn btn-danger Delete_product"
-                                        data-id={{ $product->id }}><i class="las la-times-circle"
-                                            style="font-size: 23px;"></i></a>
-
-                                </td>
+                                <th scope="col">No</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Price</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {!! $products->links() !!}
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $key => $product)
+                                <tr>
+                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary Edit-form pr-2 " data-bs-toggle="modal"
+                                            data-bs-target="#UpdateModal" data-id={{ $product->id }}
+                                            data-name={{ $product->name }} data-price={{ $product->price }}
+                                            style="font-size: 18px;"><i class="lar la-edit"></i></a>
+                                        <a href="" class="btn btn-danger Delete_product"
+                                            data-id={{ $product->id }}><i class="las la-times-circle"
+                                                style="font-size: 23px;"></i></a>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {!! $products->links() !!}
+                </div>
             </div>
             <div class="col-2"></div>
         </div>
@@ -155,7 +159,7 @@
     </div>
 
 
-
+    {!! Toastr::message() !!}
 </body>
 
 </html>

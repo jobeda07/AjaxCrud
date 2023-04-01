@@ -3,6 +3,9 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+{{-- toastr --}}
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
@@ -30,6 +33,25 @@
                         $('#addModal').modal('hide');
                         $('#addProductForm')[0].reset('hide');
                         $('.table').load(location.href + ' .table');
+                        Command: toastr["success"]("product add successfully")
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": true,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
                     }
                 },
                 error: function(err) {
@@ -72,6 +94,25 @@
                         $('#UpdateModal').modal('hide');
                         $('#UpdateProductForm')[0].reset('hide');
                         $('.table').load(location.href + ' .table');
+                        Command: toastr["success"]("product updated successfully")
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": true,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
                     }
                 },
                 error: function(err) {
@@ -98,6 +139,25 @@
                     success: function(res) {
                         if (res.status == 'success') {
                             $('.table').load(location.href + ' .table');
+                            Command: toastr["success"]("Product delete successfully")
+
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": true,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
                         }
                     }
                 });
@@ -106,5 +166,21 @@
 
 
         });
+        //pagination
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            let page = $(this).attr('href').split('page=')[1]
+            product(page)
+        });
+
+        function product(page) {
+            $.ajax({
+                url: "/pagination/pagination-data?page=" + page,
+                success: function(res) {
+                    $('.table-data').html(res);
+
+                }
+            })
+        }
     });
 </script>
