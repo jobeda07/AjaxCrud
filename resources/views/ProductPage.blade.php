@@ -55,9 +55,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $key => $product)
+                            @foreach ($products as  $product)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>
